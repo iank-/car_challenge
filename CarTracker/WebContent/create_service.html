@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Form to create a new vehicle</title>
+  <title>Form to create a new service</title>
  </head>
 <body>
   <form action="../CarTracker/rest/services" method="POST">
-	  <label for="id">ID</label>
-	  <input name="id" />
+	  
+	  <label for="name">Name</label>
+	  <input name="name" />
 	  <br/>
 	  
-	  <label for="make">Make</label>
-	  <input name="make" />
+	  <label for="availableOnGasoline">Allowed for Gasoline Vehicles</label>
+	  <input name="availableOnGasoline" />
 	  <br/>
 	  
-	  <label for="model">Model</label>
-	  <input name="model" />
+	  <label for="availableOnElectric">Allowed for Electric Vehicles</label>
+	  <input name="availableOnElectric" />
 	  <br/>
 	  
-	  <label for="year">Year</label>
-	  <input name="year" />
-	  <br/>
-	  
-	  <label for="odometerReading">Odometer reading</label>
-	  <input name="odometerReading" />
+	  <label for="availableOnDiesel">Allowed for Diesel Vehicles</label>
+	  <input name="availableOnDiesel" />
 	  <br/>
 	  
 	  <input type="submit" value="Submit" />

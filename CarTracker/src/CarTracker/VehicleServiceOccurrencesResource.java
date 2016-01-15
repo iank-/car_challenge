@@ -15,9 +15,11 @@ import javax.ws.rs.core.UriInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Path("/serviceOccurrences")
+@Path("/vehicleServiceOccurrences")
 public class VehicleServiceOccurrencesResource {
 	@Context
 	UriInfo uriInfo;
@@ -29,7 +31,7 @@ public class VehicleServiceOccurrencesResource {
 	  @Produces(MediaType.TEXT_XML)
 	  public List<VehicleServiceOccurrence> getVehicleServiceOccurrencesBrowser() {
 	    List<VehicleServiceOccurrence> serviceOccurrences = new ArrayList<VehicleServiceOccurrence>();
-	    serviceOccurrences.addAll(VehicleServiceOccurrenceDao.instance.getModel());
+	    serviceOccurrences.addAll(VehicleServiceOccurrenceDao.instance.getModel().values());
 	    return serviceOccurrences;
 	  }
 
@@ -38,7 +40,7 @@ public class VehicleServiceOccurrencesResource {
 	  @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	  public List<VehicleServiceOccurrence> getVehicleServiceOccurrences() {
 	    List<VehicleServiceOccurrence> serviceOccurrences = new ArrayList<VehicleServiceOccurrence>();
-	    serviceOccurrences.addAll(VehicleServiceOccurrenceDao.instance.getModel());
+	    serviceOccurrences.addAll(VehicleServiceOccurrenceDao.instance.getModel().values());
 	    return serviceOccurrences;
 	  }
 
@@ -56,44 +58,63 @@ public class VehicleServiceOccurrencesResource {
 	  @POST
 	  @Produces(MediaType.TEXT_HTML)
 	  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	  public void newServiceOccurrence(
+	  public void newVehicleServiceOccurrence(
 	    
 	      @FormParam("vehicleId") String vehicleId,
 	      @FormParam("serviceName") String serviceName,
 	      @FormParam("odometerReading") int odometerReading,
 	      @Context HttpServletResponse servletResponse) throws IOException {
+		  
+		  System.out.println("NEW VSO!! Looking for vehicle id=" + vehicleId);
 
 		  Vehicle vehicle = VehicleDao.instance.getVehicleForId(vehicleId);
 		  if (vehicle == null) {
-			  servletResponse.sendRedirect("../error.html");
+			  System.out.println("Unknown vehicle with id " + vehicleId);
+			  throw new RuntimeException("unknown vehicle with id" + vehicleId);
+
 		  }
 		  
-		  Service service = ServiceDao.instance.getServiceWithName(serviceName);
+		  System.out.println("Found vehicle " + vehicle.id);
+		  
+		  Service service = ServiceDao.instance.getServiceForName(serviceName);
 		  if (service == null) {
-			  servletResponse.sendRedirect("../error.html");
+		    
+		    System.out.println("Unknown service " + serviceName);
+			  throw new RuntimeException("unknown service" + serviceName);
+
 		  }
 		  
-		  VehicleServiceOccurrence vso = null;
+		  System.out.println("Found service " + service.getName());
+
+		  
+		  VehicleServiceOccurrence vso = new VehicleServiceOccurrence();
+		  vso.setOdometerReading(odometerReading);
 		  
 		  try {
-			  vso = new VehicleServiceOccurrence(vehicle, service, odometerReading);
-			  
+			  vso.setServiceAndVehicle(vehicle, service);
 		  } catch (ServiceNotCompatibleException e) {
-			  servletResponse.sendRedirect("../error.html");
+			  
+			  System.out.println("vehicle " + vehicle.getId() + " is of type " + vehicle.getVehicleType().toString() + " and is not compatible with service " + service.getName());
+			  throw new RuntimeException("not compatible");
+			  //servletResponse.sendRedirect("../error.html");
+			  
 		  }
 		  
-		  VehicleServiceOccurrenceDao.instance.getModel().add(vso);
+		  System.out.println("compatible. continuing..");
 		  
-		  servletResponse.sendRedirect("../service_vehicle.html");
+		  int count = VehicleServiceOccurrenceDao.instance.getModel().size();
+		  VehicleServiceOccurrenceDao.instance.getModel().put(Integer.toString(count + 1), vso);
+		  
+		  servletResponse.sendRedirect("../create_vehicle.html");
 	  }
 
 	  // Defines that the next path parameter after vehicle is
 	  // treated as a parameter and passed to the TodoResources
 	  // Allows to type http://localhost:8080/CarTracker/rest/todos/1
 	  // 1 will be treaded as parameter vehicle and passed to TodoResource
-	  @Path("{vehicle}")
-	  public VehicleResource getVehicle(@PathParam("vehicle") String id) {
-	    return new VehicleResource(uriInfo, request, id);
+	  @Path("{vehicleServiceOccurrence}")
+	  public VehicleServiceOccurrenceResource getVehicle(@PathParam("vehicleServiceOccurrence") String id) {
+	    return new VehicleServiceOccurrenceResource(uriInfo, request, id);
 	  }
 
 }

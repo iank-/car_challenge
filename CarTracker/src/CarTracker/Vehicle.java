@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Vehicle {
 	
-	private String id;
+	protected String id;
 	
-	private String make;
-	private String model;
-	private int year;
-	private int odometerReading;
+	protected String make;
+	protected String model;
+	protected int year;
+	protected int odometerReading;
 	
 	protected enum VehicleType {
 		ELECTRIC,

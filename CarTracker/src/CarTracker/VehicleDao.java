@@ -12,7 +12,7 @@ public enum VehicleDao {
 	
 	private VehicleDao() {
 		
-		Vehicle v1 = new Vehicle("0");
+		Vehicle v1 = new GasolineVehicle("0");
 		v1.setMake("BMW");
 		v1.setModel("525i");
 		v1.setYear(2006);

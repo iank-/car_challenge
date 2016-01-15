@@ -1,55 +1,65 @@
 package CarTracker;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Service {
-	private String name;
-	private int avgCost;
-	private boolean isAvailableOnAllVehicles;
-	private boolean isAvailableOnGasolineVehicles;
-	private boolean isAvailableOnElectricVehicles;
-	private boolean isAvailableOnDieselVehicles;
 	
-	public Service(String name, int avgCost, boolean isAvailableOnAllVehicles) {
-		this(name, avgCost, true, true, true);
+	private String id;
+	
+	private String name;
+	private boolean availableOnElectric;
+	private boolean availableOnDiesel;
+	private boolean availableOnGasoline;
+	
+	
+	public Service() {
+		
 	}
 	
-	public Service(String name, int avgCost, boolean isAvailableOnGasolineVehicles, 
-			boolean isAvailableOnElectricVehicles, boolean isAvailableOnDieselVehicles) {
-		
-		this.name = name;
-		this.avgCost = avgCost;
-		this.isAvailableOnGasolineVehicles = isAvailableOnGasolineVehicles;
-		this.isAvailableOnElectricVehicles = isAvailableOnElectricVehicles;
-		this.isAvailableOnDieselVehicles = isAvailableOnDieselVehicles;
-		
-		if (isAvailableOnGasolineVehicles
-				&& isAvailableOnElectricVehicles
-				&& isAvailableOnDieselVehicles) {
-			
-			this.isAvailableOnAllVehicles = true;
-		} else {
-			this.isAvailableOnAllVehicles = false;
-		}
-			
+	public Service(String id) {
+		this.id = id;
+	}
+	
+	public String getId() {
+		return this.id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getAvgCost() {
-		return avgCost;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public boolean isAvailableOnGasolineVehicles() {
-		return isAvailableOnGasolineVehicles;
+	public boolean isAvailableOnElectric() {
+		return availableOnElectric;
+	}
+
+	public void setAvailableOnElectric(boolean availableOnElectric) {
+		this.availableOnElectric = availableOnElectric;
+	}
+
+	public boolean isAvailableOnDiesel() {
+		return availableOnDiesel;
+	}
+
+	public void setAvailableOnDiesel(boolean availableOnDiesel) {
+		this.availableOnDiesel = availableOnDiesel;
+	}
+
+	public boolean isAvailableOnGasoline() {
+		return availableOnGasoline;
+	}
+
+	public void setAvailableOnGasoline(boolean availableOnGasoline) {
+		this.availableOnGasoline = availableOnGasoline;
 	}
 	
-	public boolean isAvailableOnElectricVehicles() {
-		return isAvailableOnElectricVehicles;
-	}
 	
-	public boolean isAvailableOnDieselVehicles() {
-		return isAvailableOnDieselVehicles;
-	}
 	
 }
