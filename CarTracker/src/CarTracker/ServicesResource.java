@@ -25,7 +25,7 @@ public class ServicesResource {
 	@Context
 	Request request;
 
-	 // Return the list of Vehicles to the user in the browser
+	 // Return the list of Services to the user in the browser
 	  @GET
 	  @Produces(MediaType.TEXT_XML)
 	  public List<Service> getServicesBrowser() {
@@ -34,7 +34,7 @@ public class ServicesResource {
 	    return services;
 	  }
 
-	  // Return the list of Vehicles for applications
+	  // Return the list of Services for applications
 	  @GET
 	  @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
 	  public List<Service> getServices() {
@@ -43,8 +43,8 @@ public class ServicesResource {
 	    return services;
 	  }
 
-	  // Returns the number of Vehicles
-	  // Use http://localhost:8080/CarTracker/rest/vehicles/count
+	  // Returns the number of Services
+	  // Use http://localhost:8080/CarTracker/rest/services/count
 	  // to get the total number of records
 	  @GET
 	  @Path("count")
@@ -77,10 +77,10 @@ public class ServicesResource {
 		  servletResponse.sendRedirect("../rest/services");
 	  }
 
-	  // Defines that the next path parameter after vehicle is
-	  // treated as a parameter and passed to the TodoResources
-	  // Allows to type http://localhost:8080/CarTracker/rest/todos/1
-	  // 1 will be treaded as parameter vehicle and passed to TodoResource
+	  // Defines that the next path parameter after Services is
+	  // treated as a parameter and passed to the ServiceResources
+	  // Allows to type http://localhost:8080/CarTracker/rest/services/1
+	  // 1 will be treated as parameter Service and passed to ServiceResource
 	  @Path("{service}")
 	  public ServiceResource getVehicle(@PathParam("service") String id) {
 	    return new ServiceResource(uriInfo, request, id);

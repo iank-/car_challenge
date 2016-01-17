@@ -77,9 +77,9 @@ public class VehiclesResource {
 	  }
 
 	  // Defines that the next path parameter after vehicle is
-	  // treated as a parameter and passed to the TodoResources
-	  // Allows to type http://localhost:8080/CarTracker/rest/todos/1
-	  // 1 will be treaded as parameter vehicle and passed to TodoResource
+	  // treated as a parameter and passed to the VehicleResources
+	  // Allows to type http://localhost:8080/CarTracker/rest/vehicles/1
+	  // 1 will be treaded as parameter vehicle and passed to VehicleResource
 	  @Path("{vehicle}")
 	  public VehicleResource getVehicle(@PathParam("vehicle") String id) {
 	    return new VehicleResource(uriInfo, request, id);

@@ -57,7 +57,7 @@ public class VehicleResource {
 	  }
 	  
 	  @DELETE
-	  public void deleteTodo() {
+	  public void deleteVehicle() {
 		Vehicle c = VehicleDao.instance.getModel().remove(id);
 	    if(c==null)
 	      throw new RuntimeException("Delete: vehicle with " + id +  " not found");
