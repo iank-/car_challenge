@@ -74,7 +74,7 @@ public class ServicesResource {
 		  
 		  ServiceDao.instance.getModel().put(Integer.toString(count + 1), s);
 
-		  servletResponse.sendRedirect("../service_vehicle.html");
+		  servletResponse.sendRedirect("../rest/services");
 	  }
 
 	  // Defines that the next path parameter after vehicle is

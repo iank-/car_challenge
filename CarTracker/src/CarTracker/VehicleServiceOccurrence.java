@@ -1,5 +1,6 @@
 package CarTracker;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import CarTracker.Vehicle.VehicleType;
@@ -10,10 +11,16 @@ public class VehicleServiceOccurrence {
 
 	private String id;
 
-	private Vehicle vehicle;
-	private Service service;
+
+	
 	private int odometerReading;
 	
+	@XmlElement(name="vehicleId")
+	private String vehicleId;
+	
+	@XmlElement(name="serviceName")
+	private String serviceName;
+
 	public VehicleServiceOccurrence() {
 		
 	}
@@ -34,8 +41,8 @@ public class VehicleServiceOccurrence {
 			throw new ServiceNotCompatibleException("Service " + s.getName() + " is not compatible with gasoline vehicle " + v.getId() + "!");
 		}
 		
-		this.service = service;
-		this.vehicle = vehicle;
+		this.vehicleId = v.getId();
+		this.serviceName = s.getName();
 	}
 	
 	public void setId(String id) {
@@ -46,13 +53,6 @@ public class VehicleServiceOccurrence {
 		return this.id;
 	}
 	
-	public Vehicle getVehicle() {
-		return this.vehicle;
-	}
-	
-	public Service getService() {
-		return this.service;
-	}
 	
 	public int getOdometerReading() {
 		return this.odometerReading;
@@ -61,5 +61,13 @@ public class VehicleServiceOccurrence {
 	public void setOdometerReading(int odometerReading) {
 		this.odometerReading = odometerReading;
 	} 
+	
+	public String getVehicleId() {
+		return vehicleId;
+	}
+
+	public String getServiceName() {
+		return serviceName;
+	}
 	
 }

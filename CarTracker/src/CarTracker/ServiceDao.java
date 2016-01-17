@@ -14,13 +14,9 @@ public enum ServiceDao {
 	
 	private ServiceDao() {
 		
-		Service s1 = new Service("0");
-		s1.setName("Oil Change");
-		s1.setAvailableOnDiesel(true);
-		s1.setAvailableOnElectric(false);
-		s1.setAvailableOnGasoline(true);
-		
-		contentProvider.put("0", s1);
+		if (this.contentProvider == null) {
+			this.contentProvider = new HashMap<>();
+		}
 		
 	}
 	

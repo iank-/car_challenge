@@ -73,7 +73,7 @@ public class VehiclesResource {
 		  
 		  VehicleDao.instance.getModel().put(id, vehicle);
 
-		  servletResponse.sendRedirect("../service_vehicle.html");
+		  servletResponse.sendRedirect("../rest/vehicles");
 	  }
 
 	  // Defines that the next path parameter after vehicle is

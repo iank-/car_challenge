@@ -105,7 +105,7 @@ public class VehicleServiceOccurrencesResource {
 		  int count = VehicleServiceOccurrenceDao.instance.getModel().size();
 		  VehicleServiceOccurrenceDao.instance.getModel().put(Integer.toString(count + 1), vso);
 		  
-		  servletResponse.sendRedirect("../create_vehicle.html");
+		  servletResponse.sendRedirect("../rest/vehicleServiceOccurrences");
 	  }
 
 	  // Defines that the next path parameter after vehicle is
