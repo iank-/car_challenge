@@ -1,6 +1,11 @@
 # car_challenge
 Simple API for tracking car maintenance, designed to run on Tomcat 7, and jUnit 4.
+
 - Based off of http://www.vogella.com/tutorials/REST/article.html
+
+# Usage
+This project was designed and implemented using Eclipse for Java EE Developers. 
+Please use 'Import Existing Projects into Workspace', and then import both of the projects found when pointing Eclipse at the root directory in this repository.
 
 # Information about what is included.
 
