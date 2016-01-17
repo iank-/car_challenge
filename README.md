@@ -1,5 +1,6 @@
 # car_challenge
 Simple API for tracking car maintenance, designed to run on Tomcat 7, and jUnit 4.
+- Based off of http://www.vogella.com/tutorials/REST/article.html
 
 # Information about what is included.
 
